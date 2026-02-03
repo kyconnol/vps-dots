@@ -8,7 +8,7 @@ set fileencoding=utf-8
 set wildmode=longest,list,full
 set wildmenu
 set backspace=indent,eol,start
-let mapleader = ","
+let mapleader = "<Space>"
 set omnifunc=sytaxcomplete#Complete
 set completeopt=longest,menuone
 
