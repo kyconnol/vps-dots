@@ -5,16 +5,15 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
+bind 'set completion-ignore-case on'
+
+# History Optimization
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTTIMEFORMAT="%F %T "
 HISTCONTROL=ignoredups:ignorespace
-
-# append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -84,6 +83,16 @@ alias e="exit"
 alias c="clear"
 alias ..="cd ../"
 alias ...="cd ../../"
+alias oc="opencode"
+
+# Vultr VPS Optimizations & Helpers
+alias update='sudo apt update && sudo apt upgrade -y'
+alias ports='sudo netstat -tulanp'
+alias mem='free -m -l -t'
+alias disk='df -h'
+alias cpu='lscpu'
+alias checkauth='tail -f /var/log/auth.log' # Useful for monitoring login attempts
+alias myip='curl -s https://ifconfig.me'    # Quick way to check public IP
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -102,7 +111,7 @@ set -o vi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-export PS1="$ "
+# Terminal and Path
 export DISPLAY=:1
-export PS1="\[\e]0;\u@\h: \w\]\H $ "
 export PATH=$PATH:~/
+export PS1='\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\$ '
